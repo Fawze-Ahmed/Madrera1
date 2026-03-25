@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" fill="none">
+  <rect width="1200" height="900" fill="white"/>
+  <defs>
+    <linearGradient id="leftArc" x1="299" y1="496" x2="474" y2="496" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFB347"/>
+      <stop offset="1" stop-color="#FF7A00"/>
+    </linearGradient>
+    <linearGradient id="rightArc" x1="726" y1="496" x2="901" y2="496" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF4A17"/>
+      <stop offset="1" stop-color="#E9002D"/>
+    </linearGradient>
+  </defs>
+
+  <path d="M360 585C300 536 270 470 285 397C303 312 372 245 459 224" stroke="url(#leftArc)" stroke-width="18" stroke-linecap="round"/>
+  <path d="M840 585C900 536 930 470 915 397C897 312 828 245 741 224" stroke="url(#rightArc)" stroke-width="18" stroke-linecap="round"/>
+
+  <g stroke-width="14" stroke-linecap="round" stroke-linejoin="round">
+    <g stroke="#FF9D1E" fill="#FF9D1E">
+      <line x1="392" y1="351" x2="392" y2="462"/>
+      <line x1="392" y1="351" x2="454" y2="420"/>
+      <line x1="392" y1="462" x2="454" y2="530"/>
+      <line x1="454" y1="420" x2="454" y2="530"/>
+      <circle cx="392" cy="351" r="20"/>
+      <circle cx="392" cy="462" r="20"/>
+      <circle cx="454" cy="420" r="20"/>
+      <circle cx="454" cy="530" r="20"/>
+    </g>
+
+    <g stroke="#F4EFE7" fill="#F4EFE7">
+      <line x1="530" y1="393" x2="600" y2="468"/>
+      <line x1="670" y1="393" x2="600" y2="468"/>
+      <line x1="600" y1="468" x2="600" y2="556"/>
+      <circle cx="530" cy="393" r="18"/>
+      <circle cx="600" cy="468" r="18"/>
+      <circle cx="670" cy="393" r="18"/>
+      <circle cx="600" cy="556" r="18"/>
+    </g>
+
+    <g stroke="#F1262D" fill="#F1262D">
+      <line x1="808" y1="351" x2="808" y2="462"/>
+      <line x1="808" y1="351" x2="746" y2="420"/>
+      <line x1="808" y1="462" x2="746" y2="530"/>
+      <line x1="746" y1="420" x2="746" y2="530"/>
+      <circle cx="808" cy="351" r="20"/>
+      <circle cx="808" cy="462" r="20"/>
+      <circle cx="746" cy="420" r="20"/>
+      <circle cx="746" cy="530" r="20"/>
+    </g>
+  </g>
+
+  <text x="600" y="720" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="112" font-weight="800" letter-spacing="8" fill="#111827">MADRERA</text>
+</svg>
