@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "اكتشف خدماتنا": "Explore Our Services",
     "شاهد أعمالنا": "View Our Work",
     "نقود تحولك الرقمي بخطة واضحة وتنفيذ قابل للقياس": "We lead your digital transformation with a clear plan and measurable execution.",
-    "في Madrera نبني حلولًا رقمية تبدأ من الفكرة والاستراتيجية وتصل إلى التنفيذ والتشغيل والتحسين المستمر.": "At Madrera, we build digital solutions that start with strategy and continue through execution, launch, and continuous improvement.",
+    "في Maderaa نبني حلولًا رقمية تبدأ من الفكرة والاستراتيجية وتصل إلى التنفيذ والتشغيل والتحسين المستمر.": "At Maderaa, we build digital solutions that start with strategy and continue through execution, launch, and continuous improvement.",
     "نحن شريك رقمي يجمع بين الرؤية التجارية والتنفيذ التقني": "We are a digital partner that combines business vision with technical execution.",
     "نساعد الشركات الناشئة والجهات المتنامية على بناء حضور رقمي احترافي، تطوير منصات فعالة، ورفع كفاءة التشغيل عبر حلول عملية قابلة للتوسع.": "We help startups and growing organizations build a professional digital presence, develop effective platforms, and improve operations through scalable solutions.",
     "من تحليل الاحتياج وحتى التسليم والتشغيل، نربط بين أهداف العمل، تجربة المستخدم، والأنظمة التقنية في مسار واحد واضح.": "From needs analysis to launch and operation, we connect business goals, user experience, and technical systems in one clear path.",
@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "قصتنا": "Our Story",
     "رؤيتنا": "Our Vision",
     "قيمنا": "Our Values",
-    "لماذا Madrera": "Why Madrera",
+    "لماذا Maderaa": "Why Maderaa",
     "خدماتنا": "Our Services",
     "أرسل تفاصيل مشروعك": "Send Your Project Details",
     "كلما كانت المعلومات أوضح، استطعنا اقتراح مسار أدق وأنسب لمرحلة عملك.": "The clearer the information, the more accurately we can propose the right path for your business stage.",
@@ -198,7 +198,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const hiddenFields = [
         ["_captcha", "false"],
         ["_template", "table"],
-        ["_subject", index === 0 ? "New Website Inquiry - Madrera" : "New Website Form Submission - Madrera"],
+        ["_subject", index === 0 ? "New Website Inquiry - Maderaa" : "New Website Form Submission - Maderaa"],
       ];
 
       hiddenFields.forEach(([name, value]) => {
