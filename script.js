@@ -4,6 +4,9 @@
     phone: "+905352875577",
     phoneDisplay: "+90 535 287 55 77",
     whatsapp: "905352875577",
+    addressAr: "طھط±ظƒظٹط§ - ط¥ط³ط·ظ†ط¨ظˆظ„ - ط¨ظˆط±طµط§",
+    addressEn: "Turkey - Istanbul - Bursa",
+    headerCta: "طھظˆط§طµظ„ ظ…ط¹ظ†ط§",
   };
 
   const translations = {
@@ -161,6 +164,17 @@
 
     document.querySelectorAll(".contact-email, .footer-email").forEach((node) => {
       node.textContent = siteConfig.email;
+    });
+
+    document.querySelectorAll(".cta-btn").forEach((node) => {
+      node.textContent = siteConfig.headerCta;
+    });
+
+    document.querySelectorAll(".info-item").forEach((item) => {
+      if (!item.querySelector(".bi-geo-alt")) return;
+      const paragraphs = item.querySelectorAll("p");
+      if (paragraphs[0]) paragraphs[0].textContent = siteConfig.addressAr;
+      if (paragraphs[1]) paragraphs[1].textContent = siteConfig.addressEn;
     });
 
     document.querySelectorAll(".btn-whatsapp, .whatsapp-link").forEach((link) => {
