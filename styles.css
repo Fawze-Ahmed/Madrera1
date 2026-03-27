@@ -49,7 +49,7 @@ section, .section { color: var(--default-color); background-color: var(--backgro
   box-shadow: 0 10px 22px rgba(255, 74, 23, 0.22);
 }
 .header .cta-btn, .header .cta-btn:focus {
-  color: var(--contrast-color); font-size: 12px; padding: 6px 16px; margin: 0 0 0 16px; border-radius: 4px; transition: 0.3s; border: 2px solid var(--contrast-color);
+  color: var(--contrast-color); font-size: 11px; padding: 5px 14px; margin: 0 0 0 14px; border-radius: 4px; transition: 0.3s; border: 2px solid var(--contrast-color);
 }
 .header .cta-btn:hover, .header .cta-btn:focus:hover { background: var(--accent-color); border-color: var(--accent-color); color: var(--contrast-color); }
 .lang-btn { background: #000; color: #fff; border: 0; padding: 8px 16px; border-radius: 20px; cursor: pointer; margin-inline-start: 16px; }
@@ -136,7 +136,7 @@ body {
 .hero p { color: color-mix(in srgb, var(--default-color), transparent 20%); margin: 10px 0 0; font-size: 24px; text-align: center; }
 .hero .btn-get-started { background: var(--accent-color); color: var(--contrast-color); font-size: 14px; letter-spacing: 1px; padding: 10px 30px; border-radius: 4px; }
 .hero-wide-cta {
-  width: min(100%, 280px);
+  width: min(100%, 320px);
   margin-top: 14px;
 }
 .hero-full-btn {
@@ -146,7 +146,7 @@ body {
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.45);
   color: #fff;
-  padding: 11px 22px;
+  padding: 12px 24px;
   border-radius: 6px;
   font-weight: 700;
 }

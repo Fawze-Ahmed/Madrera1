@@ -4,9 +4,9 @@
     phone: "+905352875577",
     phoneDisplay: "+90 535 287 55 77",
     whatsapp: "905352875577",
-    addressAr: "طھط±ظƒظٹط§ - ط¥ط³ط·ظ†ط¨ظˆظ„ - ط¨ظˆط±طµط§",
+    addressAr: "\u062a\u0631\u0643\u064a\u0627 - \u0625\u0633\u0637\u0646\u0628\u0648\u0644 - \u0628\u0648\u0631\u0635\u0627",
     addressEn: "Turkey - Istanbul - Bursa",
-    headerCta: "طھظˆط§طµظ„ ظ…ط¹ظ†ط§",
+    headerCta: "\u062a\u0648\u0627\u0635\u0644 \u0645\u0639\u0646\u0627",
   };
 
   const translations = {
