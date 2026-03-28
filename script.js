@@ -6,7 +6,8 @@
     whatsapp: "905352875577",
     addressAr: "\u062a\u0631\u0643\u064a\u0627 - \u0625\u0633\u0637\u0646\u0628\u0648\u0644 - \u0628\u0648\u0631\u0635\u0627",
     addressEn: "Turkey - Istanbul - Bursa",
-    headerCta: "\u062a\u0648\u0627\u0635\u0644 \u0645\u0639\u0646\u0627",
+    headerCtaAr: "\u062a\u0648\u0627\u0635\u0644 \u0645\u0639\u0646\u0627",
+    headerCtaEn: "Contact Us",
   };
 
   const translations = {
@@ -139,11 +140,108 @@
   const preloader = document.querySelector("#preloader");
   let langBtn = document.querySelector(".lang-btn");
 
-  const reverseTranslations = Object.fromEntries(
-    Object.entries(translations).map(([ar, en]) => [en, ar]),
-  );
+  const setNodeTranslation = (node, ar, en) => {
+    if (!node || node.dataset.ar) return;
+    node.dataset.ar = ar;
+    node.dataset.en = en;
+  };
 
-  const updateContactLinks = () => {
+  const seedStaticTranslations = () => {
+    const setPageTitle = (ar, en) => {
+      document.documentElement.dataset.titleAr = ar;
+      document.documentElement.dataset.titleEn = en;
+    };
+
+    [
+      [".navmenu a[href='index.html']", "الرئيسية", "Home"],
+      [".navmenu a[href='about.html']", "من نحن", "About Us"],
+      [".navmenu a[href='service-details.html']", "خدماتنا", "Services"],
+      [".navmenu a[href='portfolio.html']", "أعمالنا", "Our Work"],
+      [".navmenu a[href='contact.html']", "تواصل معنا", "Contact Us"],
+      [".navmenu .dropdown > a > span", "الأقسام", "Sections"],
+      [".cta-btn", siteConfig.headerCtaAr, siteConfig.headerCtaEn],
+      [".btn-get-started", "اكتشف خدماتنا", "Explore Our Services"],
+      [".custom-outline-btn", "شاهد أعمالنا", "View Our Work"],
+      [".hero-full-btn", "اطلب استشارة", "Request a Consultation"],
+      [".info-item .contact-phone", siteConfig.phoneDisplay, siteConfig.phoneDisplay],
+      [".info-item .contact-email", siteConfig.email, siteConfig.email],
+    ].forEach(([selector, ar, en]) => {
+      document.querySelectorAll(selector).forEach((node) => setNodeTranslation(node, ar, en));
+    });
+
+    document.querySelectorAll(".info-item").forEach((item) => {
+      if (item.querySelector(".bi-geo-alt")) {
+        const paragraphs = item.querySelectorAll("p");
+        if (paragraphs[0]) setNodeTranslation(paragraphs[0], siteConfig.addressAr, siteConfig.addressEn);
+        if (paragraphs[1]) setNodeTranslation(paragraphs[1], siteConfig.addressEn, siteConfig.addressEn);
+      }
+    });
+
+    if (document.body.classList.contains("index-page")) {
+      setPageTitle("Maderaa | التحول الرقمي والحلول التقنية", "Maderaa | Digital Transformation & Technology Solutions");
+      [
+        ["#hero p", "في Maderaa نبني حلولًا رقمية تبدأ من الفكرة والاستراتيجية وتصل إلى التنفيذ والتشغيل والتحسين المستمر.", "At Maderaa, we build digital solutions that start with strategy and continue through execution, operation, and continuous improvement."],
+        ["#about h3", "نحن شريك رقمي يجمع بين الرؤية التجارية والتنفيذ التقني", "We are a digital partner that combines business vision with technical execution."],
+      ].forEach(([selector, ar, en]) => {
+        document.querySelectorAll(selector).forEach((node) => setNodeTranslation(node, ar, en));
+      });
+    }
+
+    if (document.body.classList.contains("service-details-page") && document.querySelector(".page-title h1")) {
+      const title = document.querySelector(".page-title h1")?.textContent.trim();
+      if (title === "من نحن") {
+        setPageTitle("Maderaa | من نحن", "Maderaa | About Us");
+        setNodeTranslation(document.querySelector(".page-title h1"), "من نحن", "About Us");
+        setNodeTranslation(document.querySelector(".page-title p"), "نصنع حلولًا رقمية متزنة بين الرؤية التجارية والتنفيذ التقني الفعّال.", "We build balanced digital solutions that align business vision with effective technical execution.");
+      } else if (title === "خدماتنا") {
+        setPageTitle("Maderaa | خدماتنا", "Maderaa | Services");
+      }
+    }
+
+    if (document.body.classList.contains("contact-page")) {
+      setPageTitle("Maderaa | تواصل معنا", "Maderaa | Contact Us");
+      [
+        [".page-title h1", "تواصل معنا", "Contact Us"],
+        [".page-title p", "شاركنا تفاصيل مشروعك وسنساعدك على تحديد نقطة البداية المناسبة.", "Share your project details and we will help you identify the right starting point."],
+        [".breadcrumbs .current", "اتصل بنا", "Contact Us"],
+        [".contact-form-wrapper h3", "أرسل تفاصيل مشروعك", "Send Your Project Details"],
+        [".contact-form-wrapper .mb-4", "كلما كانت المعلومات أوضح، استطعنا اقتراح مسار أدق وأنسب لمرحلة عملك.", "The clearer the information, the more accurately we can propose the right path for your business stage."],
+      ].forEach(([selector, ar, en]) => {
+        document.querySelectorAll(selector).forEach((node) => setNodeTranslation(node, ar, en));
+      });
+
+      const placeholders = [
+        [".contact-form-wrapper input[type='text']", ["الاسم الكامل", "اسم الشركة أو الجهة"], ["Full Name", "Company or Organization Name"]],
+        [".contact-form-wrapper input[type='email']", ["البريد الإلكتروني"], ["Email Address"]],
+        [".contact-form-wrapper input[type='tel']", ["رقم الجوال"], ["Mobile Number"]],
+        [".contact-form-wrapper textarea", ["اكتب نبذة مختصرة عن الفكرة أو التحدي أو النتائج التي تريد الوصول إليها"], ["Write a short brief about your idea, challenge, or the results you want to achieve."]],
+      ];
+
+      placeholders.forEach(([selector, arList, enList]) => {
+        document.querySelectorAll(selector).forEach((field, index) => {
+          if (!field.dataset.arPlaceholder && arList[index]) {
+            field.dataset.arPlaceholder = arList[index];
+            field.dataset.enPlaceholder = enList[index];
+          }
+        });
+      });
+
+      document.querySelectorAll(".contact-form-wrapper select option").forEach((option, index) => {
+        const values = [
+          ["اختر نوع الخدمة", "Select Service Type"],
+          ["التحول الرقمي", "Digital Transformation"],
+          ["التجارة الإلكترونية", "E-Commerce"],
+          ["الذكاء الاصطناعي والبيانات", "AI & Data"],
+        ];
+        if (values[index]) {
+          option.dataset.ar = values[index][0];
+          option.dataset.en = values[index][1];
+        }
+      });
+    }
+  };
+
+  const updateContactLinks = (lang = "ar") => {
     document.querySelectorAll("a[href^='tel:']").forEach((link) => {
       link.href = `tel:${siteConfig.phone}`;
       if (!link.textContent.trim() || /\+90|\+966|\+971/.test(link.textContent)) {
@@ -167,13 +265,13 @@
     });
 
     document.querySelectorAll(".cta-btn").forEach((node) => {
-      node.textContent = siteConfig.headerCta;
+      node.textContent = lang === "en" ? siteConfig.headerCtaEn : siteConfig.headerCtaAr;
     });
 
     document.querySelectorAll(".info-item").forEach((item) => {
       if (!item.querySelector(".bi-geo-alt")) return;
       const paragraphs = item.querySelectorAll("p");
-      if (paragraphs[0]) paragraphs[0].textContent = siteConfig.addressAr;
+      if (paragraphs[0]) paragraphs[0].textContent = lang === "en" ? siteConfig.addressEn : siteConfig.addressAr;
       if (paragraphs[1]) paragraphs[1].textContent = siteConfig.addressEn;
     });
 
@@ -232,47 +330,30 @@
     });
   };
 
-  const translateValue = (text, lang) => {
-    const trimmed = text.trim();
-    if (!trimmed) return text;
-    const dict = lang === "en" ? translations : reverseTranslations;
-    if (!dict[trimmed]) return text;
-    return text.replace(trimmed, dict[trimmed]);
-  };
-
   const applyLanguage = (lang) => {
     document.querySelectorAll("[data-ar][data-en]").forEach((node) => {
       node.textContent = lang === "en" ? node.dataset.en : node.dataset.ar;
     });
 
-    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
-    const textNodes = [];
-    while (walker.nextNode()) {
-      const node = walker.currentNode;
-      const parentTag = node.parentElement?.tagName;
-      if (["SCRIPT", "STYLE", "NOSCRIPT"].includes(parentTag)) continue;
-      textNodes.push(node);
+    document.querySelectorAll("[data-ar-placeholder][data-en-placeholder]").forEach((field) => {
+      field.placeholder = lang === "en" ? field.dataset.enPlaceholder : field.dataset.arPlaceholder;
+    });
+
+    document.querySelectorAll("option[data-ar][data-en]").forEach((option) => {
+      option.textContent = lang === "en" ? option.dataset.en : option.dataset.ar;
+    });
+
+    if (document.documentElement.dataset.titleAr && document.documentElement.dataset.titleEn) {
+      document.title = lang === "en" ? document.documentElement.dataset.titleEn : document.documentElement.dataset.titleAr;
     }
-
-    textNodes.forEach((node) => {
-      node.textContent = translateValue(node.textContent, lang);
-    });
-
-    document.querySelectorAll("input[placeholder], textarea[placeholder]").forEach((field) => {
-      field.placeholder = translateValue(field.placeholder, lang);
-    });
-
-    document.querySelectorAll("option").forEach((option) => {
-      option.textContent = translateValue(option.textContent, lang);
-    });
-
-    document.title = translateValue(document.title, lang);
     document.documentElement.lang = lang === "en" ? "en" : "ar";
     document.documentElement.dir = lang === "en" ? "ltr" : "rtl";
 
     if (langBtn) {
       langBtn.textContent = lang === "en" ? "AR" : "EN";
     }
+
+    updateContactLinks(lang);
   };
 
   const ensureLangButton = () => {
@@ -297,6 +378,7 @@
   };
 
   const setupTranslation = () => {
+    seedStaticTranslations();
     ensureLangButton();
     const savedLang = localStorage.getItem("site_lang") || "ar";
     applyLanguage(savedLang);
