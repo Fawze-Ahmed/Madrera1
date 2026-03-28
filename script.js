@@ -199,6 +199,51 @@
       }
     });
 
+    const footerGroups = document.querySelectorAll("#footer .footer-links");
+    if (footerGroups[0]) {
+      setNodeTranslation(footerGroups[0].querySelector("h4"), "روابط مهمة", "Quick Links");
+      setTranslations([
+        ["#footer .footer-links:nth-of-type(1) a[href='index.html']", "الرئيسية", "Home"],
+        ["#footer .footer-links:nth-of-type(1) a[href='about.html']", "من نحن", "About Us"],
+        ["#footer .footer-links:nth-of-type(1) a[href='service-details.html']", "خدماتنا", "Services"],
+        ["#footer .footer-links:nth-of-type(1) a[href='portfolio.html']", "أعمالنا", "Our Work"],
+        ["#footer .footer-links:nth-of-type(1) a[href='contact.html']", "تواصل معنا", "Contact Us"],
+      ]);
+    }
+    if (footerGroups[1]) {
+      setNodeTranslation(footerGroups[1].querySelector("h4"), "أقسامنا", "Sections");
+      setTranslations([
+        ["#footer .footer-links:nth-of-type(2) a[href='service-digital-transformation.html']", "التحول الرقمي", "Digital Transformation"],
+        ["#footer .footer-links:nth-of-type(2) a[href='service-ecommerce.html']", "التجارة الإلكترونية", "E-Commerce"],
+        ["#footer .footer-links:nth-of-type(2) a[href='service-ai-data.html']", "الذكاء الاصطناعي", "AI & Data"],
+      ]);
+    }
+
+    const newsletter = document.querySelector("#footer .footer-newsletter");
+    if (newsletter) {
+      setNodeTranslation(newsletter.querySelector("h4"), "رسالتنا", "Our Mission");
+      setNodeTranslation(
+        newsletter.querySelector("p"),
+        "نبني تجارب رقمية متوازنة بين الجمال الوظيفي، الوضوح التشغيلي، والنتيجة التجارية.",
+        "We build digital experiences that balance functional beauty, operational clarity, and business impact.",
+      );
+      const newsletterEmail = newsletter.querySelector("input[type='email']");
+      if (newsletterEmail && !newsletterEmail.dataset.arPlaceholder) {
+        newsletterEmail.dataset.arPlaceholder = "بريدك الإلكتروني";
+        newsletterEmail.dataset.enPlaceholder = "Your Email";
+      }
+      const newsletterSubmit = newsletter.querySelector("input[type='submit']");
+      if (newsletterSubmit) {
+        newsletterSubmit.dataset.ar = "اشترك";
+        newsletterSubmit.dataset.en = "Subscribe";
+      }
+    }
+
+    const copyrightSpan = document.querySelector("#footer .copyright span");
+    if (copyrightSpan) {
+      setNodeTranslation(copyrightSpan, "جميع الحقوق محفوظة", "All rights reserved");
+    }
+
     if (currentPage === "index.html") {
       setPageTitle("Maderaa | التحول الرقمي والحلول التقنية", "Maderaa | Digital Transformation & Technology Solutions");
       setTranslations([
@@ -286,6 +331,7 @@
         ["#contact .php-email-form button", "إرسال الطلب", "Send Request"],
         [".footer-about .footer-contact p:nth-of-type(1)", "شريكك في بناء الحلول الرقمية العملية", "Your partner in building practical digital solutions."],
         [".footer-about .footer-contact p:nth-of-type(2)", "الاستراتيجية، التنفيذ، والتحسين في مسار واحد", "Strategy, execution, and improvement in one path."],
+        ["#contact .php-email-form input[type='submit']", "اشترك", "Subscribe"],
       ]);
     }
 
@@ -406,6 +452,7 @@
         [".call-link", "اتصل الآن", "Call Now"],
         [".whatsapp-link", "واتساب", "WhatsApp"],
         [".mail-link", "أرسل بريدًا", "Send Email"],
+        [".contact-form-wrapper button[type='submit']", "إرسال الرسالة", "Send Message"],
       ]);
 
       const placeholders = [
@@ -547,6 +594,10 @@
 
     document.querySelectorAll("option[data-ar][data-en]").forEach((option) => {
       option.textContent = lang === "en" ? option.dataset.en : option.dataset.ar;
+    });
+
+    document.querySelectorAll("input[type='submit'][data-ar][data-en]").forEach((input) => {
+      input.value = lang === "en" ? input.dataset.en : input.dataset.ar;
     });
 
     if (document.documentElement.dataset.titleAr && document.documentElement.dataset.titleEn) {
