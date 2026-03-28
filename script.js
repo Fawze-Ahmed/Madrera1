@@ -2,7 +2,7 @@
   const siteConfig = {
     email: "dt.consultant7@gmail.com",
     phone: "+905352875577",
-    phoneDisplay: "+90 535 287 55 77",
+    phoneDisplay: "+90 535 287 55 77 / 00971566628283",
     whatsapp: "905352875577",
     addressAr: "\u0627\u0644\u0625\u0645\u0627\u0631\u0627\u062a - \u062a\u0631\u0643\u064a\u0627 - \u0625\u0633\u0637\u0646\u0628\u0648\u0644 - \u0628\u0648\u0631\u0635\u0627",
     addressEn: "United Arab Emirates - Turkey - Istanbul - Bursa",
