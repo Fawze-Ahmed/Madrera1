@@ -137,7 +137,7 @@
   const mobileNavToggle = document.querySelector(".mobile-nav-toggle");
   const scrollTop = document.querySelector("#scroll-top");
   const preloader = document.querySelector("#preloader");
-  const langBtn = document.querySelector(".lang-btn");
+  let langBtn = document.querySelector(".lang-btn");
 
   const reverseTranslations = Object.fromEntries(
     Object.entries(translations).map(([ar, en]) => [en, ar]),
@@ -241,6 +241,10 @@
   };
 
   const applyLanguage = (lang) => {
+    document.querySelectorAll("[data-ar][data-en]").forEach((node) => {
+      node.textContent = lang === "en" ? node.dataset.en : node.dataset.ar;
+    });
+
     const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
     const textNodes = [];
     while (walker.nextNode()) {
@@ -271,7 +275,29 @@
     }
   };
 
+  const ensureLangButton = () => {
+    if (langBtn) return;
+    const headerContainer = document.querySelector(".header .container-fluid");
+    if (!headerContainer) return;
+
+    const button = document.createElement("button");
+    button.className = "lang-btn";
+    button.type = "button";
+    button.setAttribute("aria-label", "Switch language");
+    button.textContent = (localStorage.getItem("site_lang") || "ar") === "en" ? "AR" : "EN";
+
+    const ctaButton = headerContainer.querySelector(".cta-btn");
+    if (ctaButton) {
+      headerContainer.insertBefore(button, ctaButton);
+    } else {
+      headerContainer.appendChild(button);
+    }
+
+    langBtn = button;
+  };
+
   const setupTranslation = () => {
+    ensureLangButton();
     const savedLang = localStorage.getItem("site_lang") || "ar";
     applyLanguage(savedLang);
 
