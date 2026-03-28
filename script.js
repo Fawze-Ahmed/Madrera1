@@ -202,21 +202,29 @@
     const footerGroups = document.querySelectorAll("#footer .footer-links");
     if (footerGroups[0]) {
       setNodeTranslation(footerGroups[0].querySelector("h4"), "روابط مهمة", "Quick Links");
-      setTranslations([
-        ["#footer .footer-links:nth-of-type(1) a[href='index.html']", "الرئيسية", "Home"],
-        ["#footer .footer-links:nth-of-type(1) a[href='about.html']", "من نحن", "About Us"],
-        ["#footer .footer-links:nth-of-type(1) a[href='service-details.html']", "خدماتنا", "Services"],
-        ["#footer .footer-links:nth-of-type(1) a[href='portfolio.html']", "أعمالنا", "Our Work"],
-        ["#footer .footer-links:nth-of-type(1) a[href='contact.html']", "تواصل معنا", "Contact Us"],
-      ]);
+      const links = footerGroups[0].querySelectorAll("a");
+      const items = [
+        ["الرئيسية", "Home"],
+        ["من نحن", "About Us"],
+        ["خدماتنا", "Services"],
+        ["أعمالنا", "Our Work"],
+        ["تواصل معنا", "Contact Us"],
+      ];
+      links.forEach((link, index) => {
+        if (items[index]) setNodeTranslation(link, items[index][0], items[index][1]);
+      });
     }
     if (footerGroups[1]) {
       setNodeTranslation(footerGroups[1].querySelector("h4"), "أقسامنا", "Sections");
-      setTranslations([
-        ["#footer .footer-links:nth-of-type(2) a[href='service-digital-transformation.html']", "التحول الرقمي", "Digital Transformation"],
-        ["#footer .footer-links:nth-of-type(2) a[href='service-ecommerce.html']", "التجارة الإلكترونية", "E-Commerce"],
-        ["#footer .footer-links:nth-of-type(2) a[href='service-ai-data.html']", "الذكاء الاصطناعي", "AI & Data"],
-      ]);
+      const links = footerGroups[1].querySelectorAll("a");
+      const items = [
+        ["التحول الرقمي", "Digital Transformation"],
+        ["التجارة الإلكترونية", "E-Commerce"],
+        ["الذكاء الاصطناعي", "AI & Data"],
+      ];
+      links.forEach((link, index) => {
+        if (items[index]) setNodeTranslation(link, items[index][0], items[index][1]);
+      });
     }
 
     const newsletter = document.querySelector("#footer .footer-newsletter");
@@ -243,6 +251,65 @@
     if (copyrightSpan) {
       setNodeTranslation(copyrightSpan, "جميع الحقوق محفوظة", "All rights reserved");
     }
+
+    document.querySelectorAll(".php-email-form").forEach((form) => {
+      if (form.closest(".footer-newsletter")) return;
+
+      const textInputs = form.querySelectorAll("input[type='text']");
+      if (textInputs[0] && !textInputs[0].dataset.arPlaceholder) {
+        textInputs[0].dataset.arPlaceholder = "الاسم الكامل";
+        textInputs[0].dataset.enPlaceholder = "Full Name";
+      }
+      if (textInputs[1] && !textInputs[1].dataset.arPlaceholder) {
+        textInputs[1].dataset.arPlaceholder = "اسم الشركة أو الجهة";
+        textInputs[1].dataset.enPlaceholder = "Company or Organization Name";
+      }
+
+      const emailInput = form.querySelector("input[type='email']");
+      if (emailInput && !emailInput.dataset.arPlaceholder) {
+        emailInput.dataset.arPlaceholder = "البريد الإلكتروني";
+        emailInput.dataset.enPlaceholder = "Email Address";
+      }
+
+      const telInput = form.querySelector("input[type='tel']");
+      if (telInput && !telInput.dataset.arPlaceholder) {
+        telInput.dataset.arPlaceholder = "رقم الجوال";
+        telInput.dataset.enPlaceholder = "Mobile Number";
+      }
+
+      const textarea = form.querySelector("textarea");
+      if (textarea && !textarea.dataset.arPlaceholder) {
+        const rows = Number(textarea.getAttribute("rows") || 0);
+        if (rows >= 6) {
+          textarea.dataset.arPlaceholder = "اكتب نبذة مختصرة عن الفكرة أو التحدي أو النتائج التي تريد الوصول إليها";
+          textarea.dataset.enPlaceholder = "Write a short brief about your idea, challenge, or the results you want to achieve.";
+        } else {
+          textarea.dataset.arPlaceholder = "حدثنا عن المشروع أو التحدي الذي تعمل عليه";
+          textarea.dataset.enPlaceholder = "Tell us about the project or challenge you are working on";
+        }
+      }
+
+      const selectOptions = form.querySelectorAll("select option");
+      const selectMap = [
+        ["اختر نوع الخدمة", "Select Service Type"],
+        ["التحول الرقمي", "Digital Transformation"],
+        ["التجارة الإلكترونية", "E-Commerce"],
+        ["الذكاء الاصطناعي والبيانات", "AI & Data"],
+      ];
+      selectOptions.forEach((option, index) => {
+        if (selectMap[index] && !option.dataset.ar) {
+          option.dataset.ar = selectMap[index][0];
+          option.dataset.en = selectMap[index][1];
+        }
+      });
+
+      const submitButton = form.querySelector("button[type='submit']");
+      if (submitButton && !submitButton.dataset.ar) {
+        const isContactForm = form.closest(".contact-form-wrapper");
+        submitButton.dataset.ar = isContactForm ? "إرسال الرسالة" : "إرسال الطلب";
+        submitButton.dataset.en = isContactForm ? "Send Message" : "Send Request";
+      }
+    });
 
     if (currentPage === "index.html") {
       setPageTitle("Maderaa | التحول الرقمي والحلول التقنية", "Maderaa | Digital Transformation & Technology Solutions");
