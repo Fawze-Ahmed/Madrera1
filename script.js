@@ -6,6 +6,8 @@
     whatsapp: "905352875577",
     addressAr: "\u062a\u0631\u0643\u064a\u0627 - \u0625\u0633\u0637\u0646\u0628\u0648\u0644 - \u0628\u0648\u0631\u0635\u0627",
     addressEn: "Turkey - Istanbul - Bursa",
+    extraPhoneAr: "\u0627\u0644\u0625\u0645\u0627\u0631\u0627\u062a: 00971566628283",
+    extraPhoneEn: "UAE: 00971566628283",
     headerCtaAr: "\u062a\u0648\u0627\u0635\u0644 \u0645\u0639\u0646\u0627",
     headerCtaEn: "Contact Us",
   };
@@ -251,6 +253,26 @@
     if (copyrightSpan) {
       setNodeTranslation(copyrightSpan, "جميع الحقوق محفوظة", "All rights reserved");
     }
+
+    document.querySelectorAll(".footer-contact").forEach((wrapper) => {
+      if (wrapper.querySelector(".footer-phone-secondary")) return;
+      const node = document.createElement("p");
+      node.className = "footer-phone-secondary";
+      node.dataset.ar = siteConfig.extraPhoneAr;
+      node.dataset.en = siteConfig.extraPhoneEn;
+      node.textContent = siteConfig.extraPhoneAr;
+      wrapper.appendChild(node);
+    });
+
+    document.querySelectorAll(".info-item").forEach((item) => {
+      if (!item.querySelector(".bi-telephone") || item.querySelector(".contact-phone-secondary")) return;
+      const node = document.createElement("p");
+      node.className = "contact-phone-secondary";
+      node.dataset.ar = siteConfig.extraPhoneAr;
+      node.dataset.en = siteConfig.extraPhoneEn;
+      node.textContent = siteConfig.extraPhoneAr;
+      item.appendChild(node);
+    });
 
     document.querySelectorAll(".php-email-form").forEach((form) => {
       if (form.closest(".footer-newsletter")) return;
@@ -578,6 +600,10 @@
 
     document.querySelectorAll(".contact-phone, .footer-phone").forEach((node) => {
       node.textContent = siteConfig.phoneDisplay;
+    });
+
+    document.querySelectorAll(".contact-phone-secondary, .footer-phone-secondary").forEach((node) => {
+      node.textContent = lang === "en" ? siteConfig.extraPhoneEn : siteConfig.extraPhoneAr;
     });
 
     document.querySelectorAll(".contact-email, .footer-email").forEach((node) => {
