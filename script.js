@@ -134,6 +134,7 @@
   }
 
   const body = document.body;
+  const currentPage = window.location.pathname.split("/").pop() || "index.html";
   const header = document.querySelector("#header");
   const mobileNavToggle = document.querySelector(".mobile-nav-toggle");
   const scrollTop = document.querySelector("#scroll-top");
@@ -152,6 +153,12 @@
       document.documentElement.dataset.titleEn = en;
     };
 
+    const setTranslations = (items) => {
+      items.forEach(([selector, ar, en]) => {
+        document.querySelectorAll(selector).forEach((node) => setNodeTranslation(node, ar, en));
+      });
+    };
+
     [
       [".navmenu a[href='index.html']", "الرئيسية", "Home"],
       [".navmenu a[href='about.html']", "من نحن", "About Us"],
@@ -159,12 +166,25 @@
       [".navmenu a[href='portfolio.html']", "أعمالنا", "Our Work"],
       [".navmenu a[href='contact.html']", "تواصل معنا", "Contact Us"],
       [".navmenu .dropdown > a > span", "الأقسام", "Sections"],
+      [".navmenu .dropdown ul li:nth-child(1) a", "التحول الرقمي", "Digital Transformation"],
+      [".navmenu .dropdown ul li:nth-child(2) a", "التجارة الإلكترونية", "E-Commerce"],
+      [".navmenu .dropdown ul li:nth-child(3) a", "الذكاء الاصطناعي والبيانات", "AI & Data"],
       [".cta-btn", siteConfig.headerCtaAr, siteConfig.headerCtaEn],
       [".btn-get-started", "اكتشف خدماتنا", "Explore Our Services"],
       [".custom-outline-btn", "شاهد أعمالنا", "View Our Work"],
       [".hero-full-btn", "اطلب استشارة", "Request a Consultation"],
       [".info-item .contact-phone", siteConfig.phoneDisplay, siteConfig.phoneDisplay],
       [".info-item .contact-email", siteConfig.email, siteConfig.email],
+      [".footer-links:nth-of-type(1) h4", "روابط مهمة", "Quick Links"],
+      [".footer-links:nth-of-type(2) h4", "الأقسام", "Sections"],
+      [".footer-about .footer-contact p:first-child", "حلول رقمية تنطلق من فهم العمل", "Digital solutions built on understanding the business."],
+      [".footer-links:nth-of-type(1) a[href='index.html']", "الرئيسية", "Home"],
+      [".footer-links:nth-of-type(1) a[href='about.html']", "من نحن", "About Us"],
+      [".footer-links:nth-of-type(1) a[href='service-details.html']", "خدماتنا", "Services"],
+      [".footer-links:nth-of-type(1) a[href='contact.html']", "تواصل معنا", "Contact Us"],
+      [".footer-links:nth-of-type(2) a[href='service-digital-transformation.html']", "التحول الرقمي", "Digital Transformation"],
+      [".footer-links:nth-of-type(2) a[href='service-ecommerce.html']", "التجارة الإلكترونية", "E-Commerce"],
+      [".footer-links:nth-of-type(2) a[href='service-ai-data.html']", "الذكاء الاصطناعي", "AI & Data"],
     ].forEach(([selector, ar, en]) => {
       document.querySelectorAll(selector).forEach((node) => setNodeTranslation(node, ar, en));
     });
@@ -177,38 +197,196 @@
       }
     });
 
-    if (document.body.classList.contains("index-page")) {
+    if (currentPage === "index.html") {
       setPageTitle("Maderaa | التحول الرقمي والحلول التقنية", "Maderaa | Digital Transformation & Technology Solutions");
-      [
+      setTranslations([
         ["#hero p", "في Maderaa نبني حلولًا رقمية تبدأ من الفكرة والاستراتيجية وتصل إلى التنفيذ والتشغيل والتحسين المستمر.", "At Maderaa, we build digital solutions that start with strategy and continue through execution, operation, and continuous improvement."],
         ["#about h3", "نحن شريك رقمي يجمع بين الرؤية التجارية والتنفيذ التقني", "We are a digital partner that combines business vision with technical execution."],
-      ].forEach(([selector, ar, en]) => {
-        document.querySelectorAll(selector).forEach((node) => setNodeTranslation(node, ar, en));
-      });
+        ["#about .content p:nth-of-type(1)", "نساعد الشركات الناشئة والجهات المتنامية على بناء حضور رقمي احترافي، تطوير منصات فعالة، ورفع كفاءة التشغيل عبر حلول عملية قابلة للتوسع.", "We help startups and growing organizations build a professional digital presence, develop effective platforms, and improve operations through scalable solutions."],
+        ["#about .content p:nth-of-type(2)", "من تحليل الاحتياج وحتى التسليم والتشغيل، نربط بين أهداف العمل، تجربة المستخدم، والأنظمة التقنية في مسار واحد واضح.", "From needs analysis to launch and operation, we connect business goals, user experience, and technical systems in one clear path."],
+        ["#about .content p:nth-of-type(3)", "نؤمن أن التقنية لا تكون ناجحة إلا عندما تخدم القرار، تختصر الوقت، وتنعكس مباشرة على جودة النتائج.", "We believe technology succeeds only when it supports decisions, saves time, and directly improves outcomes."],
+        ["#about .content li:nth-child(1) span", "خطط تنفيذ واقعية مرتبطة بأهداف تجارية واضحة.", "Practical execution plans tied to clear business goals."],
+        ["#about .content li:nth-child(2) span", "حلول رقمية مرنة قابلة للنمو مع توسع أعمالك.", "Flexible digital solutions that grow with your business."],
+        ["#about .content li:nth-child(3) span", "فريق يجمع بين الاستشارة، التصميم، التطوير، والتحسين المستمر.", "A team combining consulting, design, development, and continuous improvement."],
+        [".features .feature-item:nth-child(1) h4", "استراتيجية أولًا", "Strategy First"],
+        [".features .feature-item:nth-child(1) p", "نبدأ من فهم السوق والهدف والعميل قبل اقتراح أي حل تقني.", "We start by understanding the market, objective, and customer before proposing any technical solution."],
+        [".features .feature-item:nth-child(2) h4", "تنفيذ متكامل", "Integrated Execution"],
+        [".features .feature-item:nth-child(2) p", "نوحد الهوية، المحتوى، تجربة المستخدم، والتطوير داخل رحلة عمل واحدة.", "We align identity, content, user experience, and development in one execution journey."],
+        [".features .feature-item:nth-child(3) h4", "نتائج قابلة للقياس", "Measurable Results"],
+        [".features .feature-item:nth-child(3) p", "نبني على مؤشرات أداء واضحة تساعدك على اتخاذ القرار بثقة.", "We build on clear performance indicators that help you make decisions with confidence."],
+        [".features .feature-item:nth-child(4) h4", "شراكة طويلة", "Long-Term Partnership"],
+        [".features .feature-item:nth-child(4) p", "لا نتوقف عند الإطلاق، بل نواصل الدعم والتحسين حسب احتياج العمل.", "We do not stop at launch; we continue support and improvement as your business evolves."],
+        ["#services .section-title h2", "خدماتنا", "Our Services"],
+        ["#services .section-title p", "حلول مصممة لتغطية رحلة التحول الرقمي من التخطيط إلى التشغيل", "Solutions designed to cover the digital transformation journey from planning to operation."],
+        ["#services .row > div:nth-child(1) .service-item h3", "التحول الرقمي", "Digital Transformation"],
+        ["#services .row > div:nth-child(1) .service-item p", "بناء خارطة طريق رقمية توائم بين الأهداف التشغيلية والتوسع المستقبلي.", "Building a digital roadmap aligned with operational goals and future growth."],
+        ["#services .row > div:nth-child(2) .service-item h3", "التجارة الإلكترونية", "E-Commerce"],
+        ["#services .row > div:nth-child(2) .service-item p", "استشارات وتجارب شراء مدروسة تساعد العلامات على رفع التحويلات والمبيعات.", "Thoughtful commerce strategies and buying experiences that improve conversions and sales."],
+        ["#services .row > div:nth-child(3) .service-item h3", "الذكاء الاصطناعي والبيانات", "AI & Data"],
+        ["#services .row > div:nth-child(3) .service-item p", "تحليل بيانات، لوحات متابعة، ونماذج تساعدك على قراءة الأداء وصنع القرار.", "Data analysis, dashboards, and models that help you read performance and make decisions."],
+        [".why-us .nav-item:nth-child(1) h4", "فهم العمل", "Business Understanding"],
+        [".why-us .nav-item:nth-child(2) h4", "إدارة التنفيذ", "Execution Management"],
+        [".why-us .nav-item:nth-child(3) h4", "قياس الأداء", "Performance Measurement"],
+        [".why-us .nav-item:nth-child(4) h4", "شراكة مستمرة", "Ongoing Partnership"],
+        ["#features-tab-1 h3", "نقرأ تحدياتك من زاوية العمل لا من زاوية الأدوات فقط", "We read your challenges from a business perspective, not only a tools perspective."],
+        ["#features-tab-1 .fst-italic", "كل مشروع ناجح يبدأ بفهم النموذج التشغيلي، السوق، والجمهور المستهدف.", "Every successful project starts with understanding the operating model, market, and target audience."],
+        ["#features-tab-1 li:nth-child(1) span", "تحليل الفجوات الحالية في المسار الرقمي.", "Analyzing the current gaps in the digital journey."],
+        ["#features-tab-1 li:nth-child(2) span", "تحديد الأولويات حسب الأثر والميزانية.", "Prioritizing based on impact and budget."],
+        ["#features-tab-1 li:nth-child(3) span", "تحويل الاحتياج إلى خطة تنفيذ واضحة.", "Turning the need into a clear execution plan."],
+        ["#features-tab-1 p:last-child", "نختصر عليك الدوران بين مزودين متعددين عبر رؤية واحدة تربط الحاجة بالحجم المناسب من الحل.", "We reduce the back-and-forth between multiple providers through one clear view that matches the need with the right solution scope."],
+        ["#features-tab-2 h3", "نحوّل التصور إلى خطوات عملية قابلة للتنفيذ", "We turn the concept into practical and executable steps."],
+        ["#features-tab-2 p:nth-of-type(1)", "نقسم المشروع إلى مراحل واضحة، ونحدد المخرجات والاعتمادات منذ البداية.", "We break the project into clear phases and define deliverables and dependencies from the beginning."],
+        ["#features-tab-2 .fst-italic", "هذا يقلل التشتت ويحافظ على سرعة الإنجاز وجودة التسليم.", "This reduces confusion and preserves delivery speed and quality."],
+        ["#features-tab-2 li:nth-child(1) span", "تسلسل منطقي للمراحل والمهام.", "A logical sequence for phases and tasks."],
+        ["#features-tab-2 li:nth-child(2) span", "مرونة في التطوير حسب الأولوية.", "Flexibility in development based on priority."],
+        ["#features-tab-2 li:nth-child(3) span", "تنسيق محكم بين المحتوى والتصميم والتقنية.", "Tight coordination between content, design, and technology."],
+        ["#features-tab-3 h3", "نربط التطوير بالبيانات لا بالانطباع", "We connect development to data, not assumptions."],
+        ["#features-tab-3 p:nth-of-type(1)", "نحدد ما الذي يجب قياسه قبل الإطلاق، ثم نتابع أثر التغييرات بعد التشغيل.", "We define what should be measured before launch, then track the impact of changes after release."],
+        ["#features-tab-3 li:nth-child(1) span", "لوحات مؤشرات مرتبطة بالأهداف الفعلية.", "Dashboards tied to actual goals."],
+        ["#features-tab-3 li:nth-child(2) span", "قراءة نقاط التسرب والتحويل والاحتفاظ.", "Reading drop-off, conversion, and retention points."],
+        ["#features-tab-3 li:nth-child(3) span", "اقتراحات تطوير مبنية على الأداء.", "Improvement recommendations based on performance."],
+        ["#features-tab-3 .fst-italic", "القرار الأفضل هو القرار الذي يستند إلى أرقام واضحة وسياق مفهوم.", "The best decision is the one backed by clear numbers and clear context."],
+        ["#features-tab-4 h3", "نظل قريبين بعد الإطلاق", "We stay close after launch."],
+        ["#features-tab-4 p:nth-of-type(1)", "المرحلة الأهم تبدأ بعد نشر المشروع، لذلك نقدّم دعمًا تشغيليًا وتحسينًا مستمرًا حسب نمو العمل.", "The most important stage starts after launch, so we provide operational support and continuous improvement as the business grows."],
+        ["#features-tab-4 .fst-italic", "نساعدك على التوسع بثبات بدل إعادة البناء من الصفر كل مرة.", "We help you scale steadily instead of rebuilding from scratch every time."],
+        ["#features-tab-4 li:nth-child(1) span", "متابعة فنية وتشغيلية دورية.", "Regular technical and operational follow-up."],
+        ["#features-tab-4 li:nth-child(2) span", "اقتراحات توسع محسوبة حسب المرحلة.", "Calculated scaling recommendations based on stage."],
+        ["#features-tab-4 li:nth-child(3) span", "دعم التكامل مع الأنظمة الجديدة.", "Integration support for new systems."],
+        ["#portfolio .section-title h2", "أعمالنا", "Our Work"],
+        ["#portfolio .section-title p", "نماذج مشاريع قابلة للتخصيص حسب الصور والفيديوهات التي ستضيفها لاحقًا", "Project examples that can be customized with the images and videos you add later."],
+        ["#portfolio .row > div:nth-child(1) .portfolio-item h3", "منصة تجارة إلكترونية", "E-Commerce Platform"],
+        ["#portfolio .row > div:nth-child(1) .portfolio-item p", "تطوير تجربة بيع رقمية أكثر سلاسة مع تحسين بنية التصنيفات ومسار الشراء.", "Developing a smoother selling experience with improved category structure and purchase flow."],
+        ["#portfolio .row > div:nth-child(2) .portfolio-item h3", "لوحة مؤشرات تنفيذية", "Executive Dashboard"],
+        ["#portfolio .row > div:nth-child(2) .portfolio-item p", "تجميع مصادر البيانات في واجهة واحدة لرفع سرعة المتابعة واتخاذ القرار.", "Combining data sources into one interface to improve tracking speed and decision-making."],
+        ["#portfolio .row > div:nth-child(3) .portfolio-item h3", "أتمتة خدمة العملاء", "Customer Service Automation"],
+        ["#portfolio .row > div:nth-child(3) .portfolio-item p", "تصميم تدفقات عمل تقلل المهام اليدوية وتسرّع الاستجابة للطلبات المتكررة.", "Designing workflows that reduce manual tasks and speed up responses to repeated requests."],
+        ["#portfolio .row > div:nth-child(4) .portfolio-item h3", "بوابة تشغيل داخلية", "Internal Operations Portal"],
+        ["#portfolio .row > div:nth-child(4) .portfolio-item p", "منصة موحدة لإدارة العمليات الداخلية بصلاحيات واضحة وتقارير دورية.", "A unified platform for internal operations with clear permissions and recurring reporting."],
+        ["#portfolio .row > div:nth-child(5) .portfolio-item h3", "موقع تعريفي متكامل", "Corporate Website"],
+        ["#portfolio .row > div:nth-child(5) .portfolio-item p", "بناء حضور احترافي يعكس الهوية والخدمات ويقود العميل إلى التواصل بسهولة.", "Building a professional presence that reflects the brand and guides the client toward easy contact."],
+        ["#portfolio .row > div:nth-child(6) .portfolio-item h3", "ربط أنظمة متعددة", "Multi-System Integration"],
+        ["#portfolio .row > div:nth-child(6) .portfolio-item p", "تكامل بين أنظمة الإدارة والمبيعات والتقارير لتقليل التكرار وتحسين الدقة.", "Integration between management, sales, and reporting systems to reduce duplication and improve accuracy."],
+      ]);
     }
 
-    if (document.body.classList.contains("service-details-page") && document.querySelector(".page-title h1")) {
-      const title = document.querySelector(".page-title h1")?.textContent.trim();
-      if (title === "من نحن") {
-        setPageTitle("Maderaa | من نحن", "Maderaa | About Us");
-        setNodeTranslation(document.querySelector(".page-title h1"), "من نحن", "About Us");
-        setNodeTranslation(document.querySelector(".page-title p"), "نصنع حلولًا رقمية متزنة بين الرؤية التجارية والتنفيذ التقني الفعّال.", "We build balanced digital solutions that align business vision with effective technical execution.");
-      } else if (title === "خدماتنا") {
-        setPageTitle("Maderaa | خدماتنا", "Maderaa | Services");
-      }
+    if (currentPage === "about.html") {
+      setPageTitle("Maderaa | من نحن", "Maderaa | About Us");
+      setTranslations([
+        [".page-title h1", "من نحن", "About Us"],
+        [".page-title p", "نصنع حلولًا رقمية متزنة بين الرؤية التجارية والتنفيذ التقني الفعّال.", "We build balanced digital solutions that align business vision with effective technical execution."],
+        [".breadcrumbs .current", "من نحن", "About Us"],
+        [".services-list a:nth-child(1)", "قصتنا", "Our Story"],
+        [".services-list a:nth-child(2)", "رؤيتنا", "Our Vision"],
+        [".services-list a:nth-child(3)", "قيمنا", "Our Values"],
+        [".services-list a:nth-child(4)", "لماذا Maderaa", "Why Maderaa"],
+        [".col-lg-4[data-aos-delay='100'] h4", "نعمل كامتداد لفريقك", "We work as an extension of your team."],
+        [".col-lg-4[data-aos-delay='100'] p", "هدفنا ليس فقط تسليم مشروع جميل، بل بناء أساس رقمي يساعدك على اتخاذ قرارات أفضل، تشغيل أسرع، ونمو أكثر استقرارًا.", "Our goal is not only to deliver a polished project, but to build a digital foundation that supports better decisions, faster operations, and more stable growth."],
+        ["#our-story", "قصتنا", "Our Story"],
+        ["#our-story + p", "انطلقت Maderaa من حاجة واضحة في السوق: كثير من الشركات تحتاج شريكًا يفهم العمل بعمق، ويستطيع تحويل الاحتياج إلى تجربة رقمية مدروسة دون تعقيد مبالغ فيه.", "Maderaa began from a clear market need: many companies need a partner that understands the business deeply and can turn needs into thoughtful digital experiences without unnecessary complexity."],
+        ["#our-story + p + p", "لهذا جمعنا بين منهجية استشارية عملية، قدرة تنفيذ تقنية، ونظرة طويلة المدى تجعل كل مشروع قابلًا للنمو والتحسين بعد الإطلاق.", "That is why we combine practical consulting, technical execution capability, and a long-term view that keeps every project ready for growth and improvement after launch."],
+        ["#our-vision", "رؤيتنا", "Our Vision"],
+        ["#our-vision + p", "أن نكون الشريك الرقمي الذي تلجأ إليه الشركات لبناء منظومات أكثر وضوحًا، أسرع أداءً، وأفضل أثرًا على تجربة العميل والنتائج التجارية.", "To be the digital partner companies turn to for building clearer systems, faster operations, and stronger impact on customer experience and business results."],
+        ["#our-vision + p + p", "نؤمن أن التقنية الناجحة ليست الأكثر تعقيدًا، بل الأكثر ملاءمة لمرحلة العمل والأقدر على تحويل الاحتياج إلى قيمة فعلية.", "We believe the best technology is not the most complex, but the most suitable for the business stage and the most capable of turning needs into real value."],
+        ["#our-values", "قيمنا", "Our Values"],
+        ["#our-values + ul li:nth-child(1) span", "الوضوح في الفهم والتخطيط والتنفيذ.", "Clarity in understanding, planning, and execution."],
+        ["#our-values + ul li:nth-child(2) span", "تصميم حلول قابلة للتوسع لا حلول مؤقتة.", "Designing scalable solutions, not temporary fixes."],
+        ["#our-values + ul li:nth-child(3) span", "ربط القرار الرقمي بأهداف العمل الحقيقية.", "Connecting digital decisions to real business goals."],
+        ["#our-values + ul li:nth-child(4) span", "الالتزام بالجودة دون إبطاء غير مبرر.", "Commitment to quality without unnecessary delay."],
+        ["#our-values + ul li:nth-child(5) span", "شراكة مستمرة مبنية على الثقة والنتائج.", "An ongoing partnership built on trust and results."],
+        ["#our-values + ul li:nth-child(6) span", "المرونة في التعامل مع اختلاف احتياجات كل مشروع.", "Flexibility in dealing with the unique needs of each project."],
+        ["#why-choose-us", "لماذا تختار Maderaa", "Why Choose Maderaa"],
+        ["#why-choose-us + p", "لأننا لا نتعامل مع المشروع كصفحة أو نظام منفصل، بل كجزء من رحلة أوسع تشمل الهوية، المحتوى، التجربة، والتشغيل. هذا ما يمنح العمل اتساقًا ونتائج أكثر استدامة.", "Because we do not treat the project as an isolated page or system, but as part of a wider journey that includes identity, content, experience, and operations. That creates stronger consistency and more sustainable results."],
+        ["#why-choose-us + p + p", "نحرص على تقديم مسار واضح منذ البداية، بحيث تعرف ما الذي سينفذ، ولماذا، وما الأثر المتوقع منه.", "We make sure the path is clear from the beginning, so you know what will be delivered, why it matters, and what impact to expect."],
+        [".row.gy-4.mt-4 > div:nth-child(1) .info-box h4", "جودة احترافية", "Professional Quality"],
+        [".row.gy-4.mt-4 > div:nth-child(1) .info-box p", "نوازن بين الجمال البصري، سهولة الاستخدام، والجاهزية التقنية.", "We balance visual quality, usability, and technical readiness."],
+        [".row.gy-4.mt-4 > div:nth-child(2) .info-box h4", "فهم للسوق", "Market Understanding"],
+        [".row.gy-4.mt-4 > div:nth-child(2) .info-box p", "نقارب كل مشروع من زاوية العميل والسياق التجاري لا من زاوية القالب الجاهز.", "We approach each project from the client's reality and business context, not from a ready-made template."],
+        [".row.gy-4.mt-4 > div:nth-child(3) .info-box h4", "اعتمادية وثبات", "Reliability & Stability"],
+        [".row.gy-4.mt-4 > div:nth-child(3) .info-box p", "نبني حلولًا مدروسة تسهّل التطوير اللاحق وتحافظ على الاستقرار.", "We build thoughtful solutions that make future development easier while preserving stability."],
+        [".row.gy-4.mt-4 > div:nth-child(4) .info-box h4", "تجربة تعاون مريحة", "Smooth Collaboration"],
+        [".row.gy-4.mt-4 > div:nth-child(4) .info-box p", "تواصل واضح، خطوات مفهومة، والتزام بالمواعيد والنتائج.", "Clear communication, understandable steps, and commitment to timelines and outcomes."],
+      ]);
     }
 
-    if (document.body.classList.contains("contact-page")) {
+    if (currentPage === "service-details.html") {
+      setPageTitle("Maderaa | خدماتنا", "Maderaa | Services");
+      setTranslations([
+        [".page-title h1", "خدماتنا", "Our Services"],
+        [".page-title p", "حزمة خدمات مرنة تغطي التخطيط والتنفيذ والتشغيل والتحسين.", "A flexible service offering that covers planning, execution, operations, and improvement."],
+        [".breadcrumbs .current", "خدماتنا", "Services"],
+        [".services-list a:nth-child(1)", "التحول الرقمي", "Digital Transformation"],
+        [".services-list a:nth-child(2)", "التجارة الإلكترونية", "E-Commerce"],
+        [".services-list a:nth-child(3)", "الذكاء الاصطناعي والبيانات", "AI & Data"],
+        [".col-lg-4[data-aos-delay='100'] h4", "خدمات مترابطة لا حلول معزولة", "Connected services, not isolated solutions."],
+        [".col-lg-4[data-aos-delay='100'] p", "سواء كنت تحتاج موقعًا جديدًا، منصة تشغيل، تحليل بيانات، أو إعادة ترتيب الرحلة الرقمية كاملة، فنحن نصمم الخدمة بما يناسب مرحلتك الحالية.", "Whether you need a new website, an operational platform, data analytics, or a full restructuring of the digital journey, we shape the service around your current stage."],
+        [".col-lg-8[data-aos-delay='200'] h3", "كيف نعمل على الخدمة", "How We Deliver The Service"],
+        [".col-lg-8[data-aos-delay='200'] p:nth-of-type(1)", "نبدأ بتحليل الوضع الحالي، ثم نحدد الأولويات ونحوّلها إلى مسار تنفيذ واضح. بعد ذلك نبني النسخة الأنسب من الحل، ونراقب أداءها لنطورها على أساس النتائج.", "We start by analyzing the current situation, define priorities, and turn them into a clear delivery path. Then we build the most suitable version of the solution and monitor performance to improve it based on results."],
+        [".col-lg-8[data-aos-delay='200'] li:nth-child(1) span", "تحليل الاحتياج وربطه بهدف عملي واضح.", "Analyzing the need and connecting it to a clear practical goal."],
+        [".col-lg-8[data-aos-delay='200'] li:nth-child(2) span", "اقتراح نطاق مناسب للميزانية ومرحلة المشروع.", "Proposing a scope that matches the budget and project stage."],
+        [".col-lg-8[data-aos-delay='200'] li:nth-child(3) span", "تنفيذ احترافي مع قابلية للتوسع والتحسين.", "Professional execution with room for scaling and improvement."],
+        [".col-lg-8[data-aos-delay='200'] p:nth-of-type(2)", "قسمنا خدماتنا إلى ثلاثة مسارات رئيسية حتى تصل بسرعة إلى ما يناسبك، ويمكن بالطبع دمج أكثر من خدمة داخل مشروع واحد.", "We organized our services into three main tracks so you can quickly reach what fits your needs, and of course more than one service can be combined in a single project."],
+        [".col-lg-8[data-aos-delay='200'] p:nth-of-type(3)", "استخدم القائمة الجانبية للاطلاع على كل خدمة بتفاصيلها، أو تواصل معنا مباشرة لنقترح عليك المسار الأنسب.", "Use the side list to review each service in detail, or contact us directly and we will suggest the most suitable path."],
+      ]);
+    }
+
+    if (currentPage === "portfolio.html") {
+      setPageTitle("Maderaa | أعمالنا", "Maderaa | Our Work");
+      setTranslations([
+        [".cta-btn", "ابدأ مشروعك", "Start Your Project"],
+        [".page-title h1", "أعمالنا", "Our Work"],
+        [".page-title p", "أمثلة محتوى قابلة للتعديل بحسب الصور والفيديوهات التي ستضيفها لاحقًا.", "Content examples that can be adjusted based on the images and videos you add later."],
+        [".breadcrumbs .current", "أعمالنا", "Our Work"],
+        [".portfolio.section .section-title h2", "نماذج مختارة", "Selected Samples"],
+        [".portfolio.section .section-title p", "مشاريع تظهر كيف نربط بين التجربة، التشغيل، والنتائج", "Projects showing how we connect experience, operations, and results."],
+        [".portfolio.section .row > div:nth-child(1) .portfolio-item h3", "تجربة متجر إلكتروني", "E-Commerce Store Experience"],
+        [".portfolio.section .row > div:nth-child(1) .portfolio-item p", "إعادة بناء تجربة التصفح والشراء لرفع نسبة الإكمال وتقليل مغادرة السلة.", "Rebuilding browsing and checkout to improve completion rates and reduce cart abandonment."],
+        [".portfolio.section .row > div:nth-child(2) .portfolio-item h3", "تحليلات تشغيلية", "Operational Analytics"],
+        [".portfolio.section .row > div:nth-child(2) .portfolio-item p", "لوحات مؤشرات تساعد الإدارة على متابعة الأداء اليومي والمؤشرات الحرجة.", "Dashboards that help management monitor daily performance and critical metrics."],
+        [".portfolio.section .row > div:nth-child(3) .portfolio-item h3", "أتمتة عمليات", "Process Automation"],
+        [".portfolio.section .row > div:nth-child(3) .portfolio-item p", "مسارات عمل تقلل الإدخال اليدوي وتسرّع تنفيذ الطلبات والموافقات.", "Workflows that reduce manual input and speed up requests and approvals."],
+        [".portfolio.section .row > div:nth-child(4) .portfolio-item h3", "بوابة مؤسسية", "Corporate Portal"],
+        [".portfolio.section .row > div:nth-child(4) .portfolio-item p", "موقع تعريفي متكامل يعكس القوة المؤسسية ويوضح الخدمات والقطاعات.", "A complete corporate site that reflects organizational strength and clearly presents services and sectors."],
+        [".portfolio.section .row > div:nth-child(5) .portfolio-item h3", "ربط أنظمة", "Systems Integration"],
+        [".portfolio.section .row > div:nth-child(5) .portfolio-item p", "تكامل بين إدارة الطلبات، التقارير، وأدوات خدمة العملاء داخل مسار موحد.", "Integration between order management, reporting, and customer support tools within one unified flow."],
+        [".portfolio.section .row > div:nth-child(6) .portfolio-item h3", "منصة داخلية", "Internal Platform"],
+        [".portfolio.section .row > div:nth-child(6) .portfolio-item p", "واجهة تشغيلية تساعد الفرق على تنظيم المهام والملفات والإجراءات بكفاءة أعلى.", "An operational interface that helps teams organize tasks, files, and procedures more efficiently."],
+      ]);
+    }
+
+    if (currentPage === "contact.html") {
       setPageTitle("Maderaa | تواصل معنا", "Maderaa | Contact Us");
-      [
+      setTranslations([
         [".page-title h1", "تواصل معنا", "Contact Us"],
         [".page-title p", "شاركنا تفاصيل مشروعك وسنساعدك على تحديد نقطة البداية المناسبة.", "Share your project details and we will help you identify the right starting point."],
         [".breadcrumbs .current", "اتصل بنا", "Contact Us"],
         [".contact-form-wrapper h3", "أرسل تفاصيل مشروعك", "Send Your Project Details"],
         [".contact-form-wrapper .mb-4", "كلما كانت المعلومات أوضح، استطعنا اقتراح مسار أدق وأنسب لمرحلة عملك.", "The clearer the information, the more accurately we can propose the right path for your business stage."],
-      ].forEach(([selector, ar, en]) => {
-        document.querySelectorAll(selector).forEach((node) => setNodeTranslation(node, ar, en));
-      });
+        [".info-item:nth-child(1) h3", "العنوان", "Address"],
+        [".info-item:nth-child(2) h3", "الهاتف", "Phone"],
+        [".info-item:nth-child(3) h3", "البريد", "Email"],
+        [".col-lg-6[data-aos-delay='400'] .info-wrapper h3", "لماذا يبدأ العملاء معنا", "Why Clients Start With Us"],
+        [".why-item:nth-child(1) h4", "استجابة واضحة", "Clear Response"],
+        [".why-item:nth-child(1) p", "نراجع الطلب بسرعة ونرتب الخطوة التالية بوضوح دون تعقيد.", "We review the request quickly and define the next step clearly without unnecessary complexity."],
+        [".why-item:nth-child(2) h4", "فهم دقيق", "Accurate Understanding"],
+        [".why-item:nth-child(2) p", "نركز على أصل المشكلة قبل اقتراح الحلول أو المنصات أو الأدوات.", "We focus on the root challenge before proposing solutions, platforms, or tools."],
+        [".why-item:nth-child(3) h4", "لغة عمل مشتركة", "Shared Business Language"],
+        [".why-item:nth-child(3) p", "نشرح الأمور التقنية بطريقة مفهومة تساعد الإدارة والفرق التنفيذية معًا.", "We explain technical matters in a way that helps both management and execution teams."],
+        [".why-item:nth-child(4) h4", "تنفيذ موثوق", "Reliable Execution"],
+        [".why-item:nth-child(4) p", "نلتزم بخطة مدروسة ومخرجات قابلة للمراجعة والتطوير.", "We commit to a clear plan and deliverables that can be reviewed and improved."],
+        [".why-item:nth-child(5) h4", "جدولة واقعية", "Realistic Planning"],
+        [".why-item:nth-child(5) p", "نحدد المراحل والمدة حسب حجم العمل الحقيقي وليس الوعود العامة.", "We define phases and timing based on the real workload, not generic promises."],
+        [".why-item:nth-child(6) h4", "مواكبة مستمرة", "Continuous Support"],
+        [".why-item:nth-child(6) p", "نبقى معك بعد الإطلاق لتطوير التجربة وتحسين الأداء.", "We stay with you after launch to evolve the experience and improve performance."],
+        [".working-hours h4", "ساعات العمل", "Working Hours"],
+        [".hour-item h3", "الأحد - الخميس", "Sunday - Thursday"],
+        [".hour-item p", "9:00 صباحًا - 6:00 مساءً", "9:00 AM - 6:00 PM"],
+        [".map-wrapper h3", "موقعنا أو خريطة التغطية", "Our Location or Coverage Map"],
+        [".cta-box h2", "جاهزون لمناقشة مشروعك القادم", "Ready to discuss your next project"],
+        [".cta-box p", "إذا كانت لديك فكرة أولية أو مشروع قائم يحتاج تطويرًا، سنساعدك على ترتيب الأولويات والانطلاق بثقة.", "If you have an early idea or an existing project that needs development, we will help you organize priorities and move forward with confidence."],
+        [".call-link", "اتصل الآن", "Call Now"],
+        [".whatsapp-link", "واتساب", "WhatsApp"],
+        [".mail-link", "أرسل بريدًا", "Send Email"],
+      ]);
 
       const placeholders = [
         [".contact-form-wrapper input[type='text']", ["الاسم الكامل", "اسم الشركة أو الجهة"], ["Full Name", "Company or Organization Name"]],
@@ -238,6 +416,14 @@
           option.dataset.en = values[index][1];
         }
       });
+    }
+
+    if (currentPage === "service-digital-transformation.html" || currentPage === "service-ecommerce.html" || currentPage === "service-ai-data.html") {
+      setTranslations([
+        [".services-list a:nth-child(1)", "التحول الرقمي", "Digital Transformation"],
+        [".services-list a:nth-child(2)", "التجارة الإلكترونية", "E-Commerce"],
+        [".services-list a:nth-child(3)", "الذكاء الاصطناعي والبيانات", "AI & Data"],
+      ]);
     }
   };
 
