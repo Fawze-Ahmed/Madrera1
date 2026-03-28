@@ -267,12 +267,9 @@ body {
 .alt-three { filter: hue-rotate(92deg) saturate(1.02); }
 .alt-four { filter: hue-rotate(230deg) saturate(1.04); }
 .alt-five { filter: hue-rotate(300deg) saturate(1.08); }
-.services .row > div:nth-child(1) .service-image { background-image: url("assets/custom/img-01.jpeg"); filter: none; }
-.services .row > div:nth-child(2) .service-image { background-image: url("assets/custom/img-11.jpeg"); filter: none; }
-.services .row > div:nth-child(3) .service-image { background-image: url("assets/custom/img-15.jpeg"); filter: none; }
-.services .row > div:nth-child(4) .service-image { background-image: url("assets/custom/img-03.jpeg"); filter: none; }
-.services .row > div:nth-child(5) .service-image { background-image: url("assets/custom/img-18.jpeg"); filter: none; }
-.services .row > div:nth-child(6) .service-image { background-image: url("assets/custom/img-27.jpeg"); filter: none; }
+.services .row > div:nth-child(1) .service-image { background-image: url("assets/custom/img-13.jpeg"); filter: none; }
+.services .row > div:nth-child(2) .service-image { background-image: url("assets/custom/img-23.jpeg"); filter: none; }
+.services .row > div:nth-child(3) .service-image { background-image: url("assets/custom/img-26.jpeg"); filter: none; }
 .portfolio .row > div:nth-child(1) .portfolio-image { background-image: url("assets/custom/img-04.jpeg"); filter: none; }
 .portfolio .row > div:nth-child(2) .portfolio-image { background-image: url("assets/custom/img-05.jpeg"); filter: none; }
 .portfolio .row > div:nth-child(3) .portfolio-image { background-image: url("assets/custom/img-06.jpeg"); filter: none; }
@@ -284,6 +281,10 @@ body {
 .why-us #features-tab-3 .tab-image { background-image: url("assets/custom/img-16.jpeg"); filter: none; }
 .why-us #features-tab-4 .tab-image { background-image: url("assets/custom/img-17.jpeg"); filter: none; }
 .service-details .services-img { background-image: url("assets/custom/img-24.jpeg"); filter: none; }
+.service-overview-visual { background-image: url("assets/custom/img-18.jpeg") !important; }
+.service-digital-visual { background-image: url("assets/custom/img-13.jpeg") !important; }
+.service-ecommerce-visual { background-image: url("assets/custom/img-23.jpeg") !important; }
+.service-ai-visual { background-image: url("assets/custom/img-26.jpeg") !important; }
 
 .features { padding: 30px 0 60px; }
 .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
