@@ -243,16 +243,17 @@ body {
   margin: 16px 0;
 }
 .detail-list li {
-  position: relative;
-  padding-right: 28px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
   margin-bottom: 10px;
 }
 .detail-list li::before {
   content: "\f26a";
   font-family: "bootstrap-icons";
-  position: absolute;
-  right: 0;
-  top: 2px;
+  position: static;
+  margin-top: 2px;
+  flex-shrink: 0;
   color: var(--accent-color);
 }
 .value-box {
@@ -450,13 +451,15 @@ select.form-control {
 .card-title-slot:empty::before { min-height: 32px; }
 
 @media (max-width: 991px) { .features-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 991px) {
+  .content-grid { grid-template-columns: 1fr; }
+}
 @media (max-width: 768px) {
   .hero h2 { font-size: 32px; }
   .hero p { font-size: 18px; }
   .section-title p { font-size: 24px; }
   .about .content ul li, .service-details ul li { gap: 10px; }
   .about .content ul i, .service-details ul i { margin-top: 7px; }
-  .content-grid { grid-template-columns: 1fr; }
   .detail-card { padding: 20px; }
   .service-item .details, .portfolio-item .details { margin: -70px 15px 0 15px; padding: 40px 20px; }
   .service-item .details .icon, .portfolio-item .details .icon { width: 60px; height: 60px; top: -30px; left: calc(50% - 30px); font-size: 24px; }
